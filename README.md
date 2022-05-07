@@ -1,5 +1,5 @@
-.NET Bridge 2.0
-=============================
+.NET Bridge 2.0.0
+=================
 
 Field Reports .NET Bridge（以降，本モジュールと表記します）は，
 PDF帳票ツールField Reportsを.NET対応プログラミング言語から利用するためのライブラリです。
