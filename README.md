@@ -69,7 +69,7 @@ Visual Studioもしくはdotnetコマンドが導入済みであるものとし�
 利用している開発環境に応じた方法でインストールしてください。
 
 ```
-> dotnet add package FieldWorks.FieldReports.Bridge --version 2.0.0
+> dotnet add package FieldWorks.FieldReports --version 2.0.0
 ```
 
 ## 動作確認

@@ -9,14 +9,16 @@
     <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
-    <AssemblyName>Bridge</AssemblyName>
+    <AssemblyName>FieldWorks.FieldReports</AssemblyName>
     <PublicSign>true</PublicSign>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>field-reports.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <PackageId>FieldWorks.FieldReports.Bridge</PackageId>
-    <PackageProjectUrl>https://www.field-works.co.jp</PackageProjectUrl>
+    <PackageId>$(AssemblyName)</PackageId>
+    <PackageProjectUrl>https://www.field-works.co.jp/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/field-works/dotnet-bridge</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
     <RuntimeIdentifiers>win;win-x64;win-x86</RuntimeIdentifiers>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
@@ -32,6 +34,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
