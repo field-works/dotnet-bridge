@@ -23,7 +23,7 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "FieldReports.NETBridge", "index.html", [
-    [ ".NET Bridge 2.0", "index.html", [
+    [ ".NET Bridge 2.0.0", "index.html", [
       [ "ライセンス", "index.html#autotoc_md0", null ],
       [ "必要条件", "index.html#autotoc_md1", [
         [ "Field Reports本体", "index.html#autotoc_md2", null ],
