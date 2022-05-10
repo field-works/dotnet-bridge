@@ -31,3 +31,8 @@ jobs:
         with:
           name: target
           path: target
+
+      - name: Publish to GitHub Packages
+        run: |
+          dotnet nuget add source "https://nuget.pkg.github.com/field-works/index.json" -n "github" -u kkajita -p ${{secrets.NUGET_PACKAGE}} --store-password-in-clear-text
+          dotnet nuget push "*.nupkg" --api-key ${{secrets.NUGET_PACKAGE}} --source "github" --skip-duplicate

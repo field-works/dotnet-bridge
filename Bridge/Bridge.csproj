@@ -16,6 +16,7 @@
     <DelaySign>false</DelaySign>
     <PackageId>FieldWorks.FieldReports.Bridge</PackageId>
     <PackageProjectUrl>https://www.field-works.co.jp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/field-works/dotnet-bridge</RepositoryUrl>
     <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
     <RuntimeIdentifiers>win;win-x64;win-x86</RuntimeIdentifiers>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
