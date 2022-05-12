@@ -3,10 +3,11 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 using System.Linq;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FieldWorks.FieldReports
 {
+    [TestClass]
     public class TestReports
     {
         private IProxy Reports;
@@ -26,62 +27,64 @@ namespace FieldWorks.FieldReports
             return Encoding.ASCII.GetString(bytes.Skip(bytes.Length - 6).ToArray()).TrimEnd();
         }
 
-        [Fact]
-        public void バージョンが取得できる() 
+        [TestMethod]
+        public void バージョンが取得できる()
         {
             var version = Reports.Version();
-            Assert.StartsWith("2.", version);
+            Assert.AreEqual("2.", version.Substring(0, 2));
         }
 
-        [Fact]
+        [TestMethod]
         public void JSON文字列を元にPDFを生成できる()
         {
             var param = @"{
-    ""template"": {""paper"": ""A4""},
-    ""context"": {
-        ""hello"": {
-            ""new"": ""Tx"",
-            ""value"": ""Hello, World!"",
-            ""rect"": [100, 700, 400, 750]
-        }
-    }
-}";
+                ""template"": {""paper"": ""A4""},
+                ""context"": {
+                ""hello"": {
+                    ""new"": ""Tx"",
+                    ""value"": ""Hello, World!"",
+                    ""rect"": [100, 700, 400, 750]
+                    }
+                }
+            }";
             var pdf = Reports.Render(param);
-            Assert.StartsWith("%PDF", PdfHeader(pdf));
-            Assert.EndsWith("%%EOF", PdfFooter(pdf));
+            Assert.AreEqual("%PDF", PdfHeader(pdf).Substring(0, 4));
+            Assert.AreEqual("%%EOF", PdfFooter(pdf).Substring(0, 5));
         }
 
-        [Fact]
+        [TestMethod]
         public void 動的に組み立てたパラメータでPDFを生成できる()
         {
-            var param = new {
-                template = new {
+            var param = new
+            {
+                template = new
+                {
                     paper = "A4"
                 },
-                context = new {
-                    hello = new {
+                context = new
+                {
+                    hello = new
+                    {
                         @new = "Tx",
                         value = "Hello, World!",
-                        rect = new int[] {100, 700, 400, 750}
+                        rect = new int[] { 100, 700, 400, 750 }
                     }
                 }
             };
             var pdf = Reports.Render(param);
-            Assert.StartsWith("%PDF", PdfHeader(pdf));
-            Assert.EndsWith("%%EOF", PdfFooter(pdf));
+            Assert.AreEqual("%PDF", PdfHeader(pdf).Substring(0, 4));
+            Assert.AreEqual("%%EOF", PdfFooter(pdf).Substring(0, 5));
         }
 
-        [Fact]
+
+        [TestMethod]
+        [ExpectedException(typeof(ReportsException))]
         public void パースエラーで例外が発生する()
         {
-            var exn = Assert.Throws<ReportsException>(() => {
-                var pdf = Reports.Render("{,}");
-            });
-            Console.Error.WriteLine(exn.Message);
-            Assert.NotEmpty(exn.Message);
+            var pdf = Reports.Render("{,}");
         }
 
-        [Fact]
+        [TestMethod]
         public void PDFデータを解析できる()
         {
             using (var fs = new FileStream("./files/mitumori.pdf", FileMode.Open, FileAccess.Read))
@@ -89,8 +92,8 @@ namespace FieldWorks.FieldReports
             {
                 fs.CopyTo(ms);
                 var s = Reports.Parse(ms.ToArray());
-                Assert.StartsWith("{", s.TrimStart());
-                Assert.EndsWith("}", s.TrimEnd());
+                Assert.IsTrue(s.TrimStart().StartsWith("{"));
+                Assert.IsTrue(s.TrimEnd().EndsWith("}"));
                 var json = JsonDocument.Parse(s);
             }
         }
