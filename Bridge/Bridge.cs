@@ -42,7 +42,8 @@ namespace FieldWorks.FieldReports
         /// <returns>Field Reports Proxyオブジェクト</returns>
         public static IProxy CreateProxy(string uriString = null)
         {
-            var uri = new Uri(uriString ?? Environment.GetEnvironmentVariable("REPORTS_PROXY") ?? "exec:reports");
+            uriString = uriString ?? Environment.GetEnvironmentVariable("REPORTS_PROXY") ?? "exec:reports";
+            var uri = new Uri(uriString);
             if (uri.Scheme == "exec")
             {
                 var q = HttpUtility.ParseQueryString(uri.Query);
