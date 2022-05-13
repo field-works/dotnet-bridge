@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
-using System.Web;
+using System.Collections.Specialized;
 
 namespace FieldWorks.FieldReports
 {
@@ -46,7 +46,7 @@ namespace FieldWorks.FieldReports
             var uri = new Uri(uriString);
             if (uri.Scheme == "exec")
             {
-                var q = HttpUtility.ParseQueryString(uri.Query);
+                var q = ParseQueryString(uri.Query);
                 var exePath = uri.AbsolutePath;
                 var cwd = q["cwd"] ?? ".";
                 int logLevel;
@@ -97,6 +97,22 @@ namespace FieldWorks.FieldReports
         public static IProxy CreateHttpProxy(HttpClient httpClient)
         {
             return new HttpProxy(httpClient);
+        }
+
+        private static NameValueCollection ParseQueryString(string query)
+        {
+            var result = new NameValueCollection();
+            foreach (string pair in query.Split('&'))
+            {
+                var kv = pair.Split('=');
+                var key = kv.Length == 1 ? null : Uri.UnescapeDataString(kv[0]).Replace('+', ' ');
+                var values = Uri.UnescapeDataString(kv.Length == 1 ? kv[0] : kv[1])
+                    .Replace('+', ' ')
+                    .Split(',');
+                foreach (string value in values)
+                    result.Add(key, value);
+            }
+            return result;
         }
     }
 }

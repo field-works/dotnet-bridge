@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using System.Text.Json;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 /**
  * .NET Bridgeで発生する例外
@@ -28,10 +28,8 @@ namespace FieldWorks.FieldReports
             LogWriter = logWriter;
         }
 
-        private Task<Process> RunReportsAsync(string args, byte[] data = null)
+        private Process RunReports(string args, byte[] data = null)
         {
-            var tcs = new TaskCompletionSource<Process>();
-
             var process = new Process()
             {
                 StartInfo = new ProcessStartInfo(ExePath, args)
@@ -45,7 +43,6 @@ namespace FieldWorks.FieldReports
                 },
                 EnableRaisingEvents = true,
             };
-            process.Exited += (_, e) => tcs.SetResult(process);
             process.Start();
             if (LogLevel > 0) {
                 process.ErrorDataReceived += (_, e) => LogWriter.WriteLine(e.Data);
@@ -58,7 +55,7 @@ namespace FieldWorks.FieldReports
                     stream.Write(data, 0, data.Length);
                 }
             }
-            return tcs.Task;
+            return process;
         }
 
         private async Task<string> VersionAsync()
@@ -67,12 +64,12 @@ namespace FieldWorks.FieldReports
             {
                 using (var result = new MemoryStream())
                 {
-                    var process = await RunReportsAsync("version");
-                    process.WaitForExit();
+                    var process = RunReports("version");
                     using (var stream = process.StandardOutput.BaseStream)
                     {
                         await stream.CopyToAsync(result);
                     }
+                    process.WaitForExit();
                     if (process.ExitCode != 0)
                         throw new Exception($"Exit Code = {process.ExitCode}");
                     return Encoding.UTF8.GetString(result.ToArray()).Trim();
@@ -102,13 +99,13 @@ namespace FieldWorks.FieldReports
             {
                 using (var result = new MemoryStream())
                 {
-                    var jstring = (param is string) ? (string)param : JsonSerializer.Serialize(param);
-                    var process = await RunReportsAsync($"render -l{LogLevel} - -", Encoding.UTF8.GetBytes(jstring));
-                    process.WaitForExit();
+                    var jstring = (param is string) ? (string)param : JsonConvert.SerializeObject(param);
+                    var process = RunReports($"render -l{LogLevel} - -", Encoding.UTF8.GetBytes(jstring));
                     using (var stream = process.StandardOutput.BaseStream)
                     {
                         await stream.CopyToAsync(result);
                     }
+                    process.WaitForExit();
                     if (process.ExitCode != 0)
                         throw new Exception($"Exit Code = {process.ExitCode}");
                     return result.ToArray();
@@ -138,12 +135,12 @@ namespace FieldWorks.FieldReports
             {
                 using (var result = new MemoryStream())
                 {
-                    var process = await RunReportsAsync("parse -", pdf);
-                    process.WaitForExit();
+                    var process = RunReports("parse -", pdf);
                     using (var stream = process.StandardOutput.BaseStream)
                     {
                         await stream.CopyToAsync(result);
                     }
+                    process.WaitForExit();
                     if (process.ExitCode != 0)
                         throw new Exception($"Exit Code = {process.ExitCode}");
                     return Encoding.UTF8.GetString(result.ToArray()).Trim();

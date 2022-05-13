@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using System.Text.Json;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FieldWorks.FieldReports
@@ -76,7 +76,6 @@ namespace FieldWorks.FieldReports
             Assert.AreEqual("%%EOF", PdfFooter(pdf).Substring(0, 5));
         }
 
-
         [TestMethod]
         [ExpectedException(typeof(ReportsException))]
         public void パースエラーで例外が発生する()
@@ -94,7 +93,7 @@ namespace FieldWorks.FieldReports
                 var s = Reports.Parse(ms.ToArray());
                 Assert.IsTrue(s.TrimStart().StartsWith("{"));
                 Assert.IsTrue(s.TrimEnd().EndsWith("}"));
-                var json = JsonDocument.Parse(s);
+                var json = JObject.Parse(s);
             }
         }
     }

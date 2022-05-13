@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
-using System.Text.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace FieldWorks.FieldReports
 {
@@ -50,7 +50,7 @@ namespace FieldWorks.FieldReports
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Post, "render");
-                var jstring = (param is string) ? (string)param : JsonSerializer.Serialize(param);
+                var jstring = (param is string) ? (string)param : JsonConvert.SerializeObject(param);
                 request.Content = new StringContent(jstring, Encoding.UTF8, "application/json");;
                 var response = await HttpClient.SendAsync(request);
                 if (!response.IsSuccessStatusCode)
