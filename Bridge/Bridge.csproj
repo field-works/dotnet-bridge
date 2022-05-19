@@ -6,7 +6,7 @@
     <AssemblyTitle>Field Reports .NET Bridge</AssemblyTitle>
     <VersionPrefix>2.0.0</VersionPrefix>
     <Authors>Field Works, LLC</Authors>
-    <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <AssemblyName>FieldWorks.FieldReports</AssemblyName>
