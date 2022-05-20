@@ -5,10 +5,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-/**
- * .NET Bridgeで発生する例外
- * 
- */
 namespace FieldWorks.FieldReports
 {
     internal class ExecProxy : IProxy

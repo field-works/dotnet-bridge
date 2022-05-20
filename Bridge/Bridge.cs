@@ -14,7 +14,7 @@ namespace FieldWorks.FieldReports
     public static class Bridge
     {
         /// <summary>
-        /// 引数で与えられるURIに応じたField Reports Proxyオブジェクトを返却します。
+        /// URIに応じたField Reports Proxyオブジェクトを返却します。
         /// 
         ///     // コマンド連携時:
         ///     Proxy reports = Bridge.createProxy("exec:/usr/local/bin/reports?cwd=/usr/share&logleve=3");
@@ -25,7 +25,7 @@ namespace FieldWorks.FieldReports
         /// <param name="uriString">
         /// Field Reportsとの接続方法を示すURI。<br>
         /// nullを指定または省略した場合，環境変数'REPORTS_PROXY'からURIを取得します。<br>
-        /// 環境変数'REPORTS_PROXY'も未設定の場合のURIは，"exec:reports"とします。
+        /// 環境変数'REPORTS_PROXY'も未設定の場合は，URIを"exec:reports"とします。
         /// </param>
         /// <remarks>
         ///  URI書式（コマンド連携時）:
@@ -74,7 +74,7 @@ namespace FieldWorks.FieldReports
         /// <summary>
         /// HTTP通信によりField Reportsと連携するProxyオブジェクトを生成します。
         /// </summary>
-        /// <param name="baseUri">ベースUri</param>
+        /// <param name="baseUri">ベースURI</param>
         /// <returns>Field Reports Proxyオブジェクト</returns> 
         public static IProxy CreateHttpProxy(string baseUri = "http://localhost:50080/")
         {
