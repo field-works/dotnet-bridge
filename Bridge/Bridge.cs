@@ -17,10 +17,12 @@ namespace FieldWorks.FieldReports
         /// URIに応じたField Reports Proxyオブジェクトを返却します。
         /// 
         ///     // コマンド連携時:
-        ///     Proxy reports = Bridge.createProxy("exec:/usr/local/bin/reports?cwd=/usr/share&logleve=3");
+        ///     using FieldWorks.FieldReports;
+        ///     var reports = Bridge.createProxy("exec:/usr/local/bin/reports?cwd=/usr/share&logleve=3");
         /// 
         ///     // HTTP連携時:
-        ///     Proxy reports = Bridge.createProxy("http://localhost:50080/");
+        ///     using FieldWorks.FieldReports;
+        ///     var reports = Bridge.createProxy("http://localhost:50080/");
         /// </summary>
         /// <param name="uriString">
         /// Field Reportsとの接続方法を示すURI。<br>

@@ -73,53 +73,18 @@ Visual Studioもしくはdotnetコマンドが導入済みであるものとし�
 ```
 
 ## 動作確認
-### コマンド連携時
 
-本モジュールのソースコードを展開して，以下のコマンドを実行してください。
-
-```shell
-$ dotnet test
-```
-
-reportsコマンドにパスが通っていない場合は，環境変数'REPORTS_PROXY'でコマンドのパスを指定してください
-（動作環境に応じて，パスは変更してください）。
-
-LinuxまたはmacOSでの実行例：
-```shell
-$ REPORTS_PROXY=exec:/usr/local/bin/reports dotnet test
-```
-
-Windowsでの実行例：
-```cmd
-> set REPORTS_PROXY="C:\Program Files\Field Works\Field Reports 2.0\reports.exe"
-> dotnet test
-```
-
-### HTTP連携時
-
-Field Reportsをサーバーモードで起動してください。
+動作確認用のコンソールプロジェクトを作成します。
 
 ```shell
-$ reports server -l4
+$ dotnet new console -o test
+$ cd test
+$ dotnet add package FieldWorks.FieldReports
 ```
 
-本モジュールのソースコードを展開して，以下のコマンドを実行してください
-（動作環境に応じて，URLは変更してください）。
+Program.csを以下のように編集します。
 
-LinuxまたはmacOSでの実行例：
-```shell
-$ REPORTS_PROXY=http://localhost:50080/ dotnet test
-```
-
-Windowsでの実行例：
-```shell
-> set REPORTS_PROXY=http://localhost:50080/
-> dotnet test
-```
-
-## API使用例
-
-```c#
+```c#::Program.cs
 using FieldWorks.FieldReports;
 
 var param = new {
@@ -134,8 +99,56 @@ var param = new {
         }
     }
 };
-var reports = Bridge.CreateProxy("http://localhost:50080/");
+var reports = Bridge.CreateProxy();
 var pdf = reports.Render(param);
+```
+
+### コマンド連携時
+
+以下のコマンドを実行してください。
+
+LinuxまたはmacOSでの実行例：
+```shell
+$ REPORTS_PROXY=exec:/usr/local/bin/reports dotnet run
+2.0.0rc3
+%PDF-1.6
+...
+```
+
+Windowsでの実行例：
+```cmd
+> set REPORTS_PROXY="C:\Program Files\Field Works\Field Reports 2.0\reports.exe"
+> dotnet run
+2.0.0rc3
+%PDF-1.6
+...
+```
+
+### HTTP連携時
+
+Field Reportsをサーバーモードで起動してください。
+
+```shell
+$ reports server -l4
+```
+
+以下のコマンドを実行してください（動作環境に応じて，URLは変更してください）。
+
+LinuxまたはmacOSでの実行例：
+```shell
+$ REPORTS_PROXY=http://localhost:50080/ dotnet run
+2.0.0rc3
+%PDF-1.6
+...
+```
+
+Windowsでの実行例：
+```shell
+> set REPORTS_PROXY=http://localhost:50080/
+> dotnet run
+2.0.0rc3
+%PDF-1.6
+...
 ```
 
 ## 著者
