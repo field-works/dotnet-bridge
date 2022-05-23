@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classFieldWorks_1_1FieldReports_1_1Bri
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 静的公開メンバ関数</h2></td></tr>
 <tr class="memitem:a545c0e840305681b0c97c6b68a0d7f85"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="interfaceFieldWorks_1_1FieldReports_1_1IProxy.html">IProxy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFieldWorks_1_1FieldReports_1_1Bridge.html#a545c0e840305681b0c97c6b68a0d7f85">CreateProxy</a> (string uriString=null)</td></tr>
-<tr class="memdesc:a545c0e840305681b0c97c6b68a0d7f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">引数で与えられるURIに応じたField Reports Proxyオブジェクトを返却します。  <a href="classFieldWorks_1_1FieldReports_1_1Bridge.html#a545c0e840305681b0c97c6b68a0d7f85">[詳解]</a><br /></td></tr>
+<tr class="memdesc:a545c0e840305681b0c97c6b68a0d7f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">URIに応じたField Reports Proxyオブジェクトを返却します。  <a href="classFieldWorks_1_1FieldReports_1_1Bridge.html#a545c0e840305681b0c97c6b68a0d7f85">[詳解]</a><br /></td></tr>
 <tr class="separator:a545c0e840305681b0c97c6b68a0d7f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab492da440bc955d278d382c83bb816dd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="interfaceFieldWorks_1_1FieldReports_1_1IProxy.html">IProxy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFieldWorks_1_1FieldReports_1_1Bridge.html#ab492da440bc955d278d382c83bb816dd">CreateExecProxy</a> (string exePath=&quot;reports&quot;, string cwd=&quot;.&quot;, int logLevel=0, TextWriter logWriter=null)</td></tr>
 <tr class="memdesc:ab492da440bc955d278d382c83bb816dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">コマンド呼び出しによりField Reportsと連携するProxyオブジェクトを生成します。  <a href="classFieldWorks_1_1FieldReports_1_1Bridge.html#ab492da440bc955d278d382c83bb816dd">[詳解]</a><br /></td></tr>
@@ -236,7 +236,7 @@ $(document).ready(function(){initNavTree('classFieldWorks_1_1FieldReports_1_1Bri
 <p>HTTP通信によりField Reportsと連携するProxyオブジェクトを生成します。 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">baseUri</td><td>ベースUri</td></tr>
+    <tr><td class="paramname">baseUri</td><td>ベースURI</td></tr>
   </table>
   </dd>
 </dl>
@@ -270,17 +270,19 @@ $(document).ready(function(){initNavTree('classFieldWorks_1_1FieldReports_1_1Bri
 </table>
 </div><div class="memdoc">
 
-<p>引数で与えられるURIに応じたField Reports Proxyオブジェクトを返却します。 </p>
+<p>URIに応じたField Reports Proxyオブジェクトを返却します。 </p>
 <pre class="fragment">// コマンド連携時:
-Proxy reports = Bridge.createProxy("exec:/usr/local/bin/reports?cwd=/usr/share&amp;logleve=3");
+using FieldWorks.FieldReports;
+var reports = Bridge.createProxy("exec:/usr/local/bin/reports?cwd=/usr/share&amp;logleve=3");
 
 // HTTP連携時:
-Proxy reports = Bridge.createProxy("http://localhost:50080/");
+using FieldWorks.FieldReports;
+var reports = Bridge.createProxy("http://localhost:50080/");
 </pre><dl class="params"><dt>引数</dt><dd>
   <table class="params">
     <tr><td class="paramname">uriString</td><td>Field Reportsとの接続方法を示すURI。<br  />
  nullを指定または省略した場合，環境変数'REPORTS_PROXY'からURIを取得します。<br  />
- 環境変数'REPORTS_PROXY'も未設定の場合のURIは，"exec:reports"とします。 </td></tr>
+ 環境変数'REPORTS_PROXY'も未設定の場合は，URIを"exec:reports"とします。 </td></tr>
   </table>
   </dd>
 </dl>

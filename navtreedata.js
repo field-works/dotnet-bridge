@@ -37,8 +37,7 @@ var NAVTREE =
         [ "コマンド連携時", "index.html#autotoc_md8", null ],
         [ "HTTP連携時", "index.html#autotoc_md9", null ]
       ] ],
-      [ "API使用例", "index.html#autotoc_md10", null ],
-      [ "著者", "index.html#autotoc_md11", null ]
+      [ "著者", "index.html#autotoc_md10", null ]
     ] ],
     [ "名前空間", "namespaces.html", [
       [ "名前空間一覧", "namespaces.html", "namespaces_dup" ]

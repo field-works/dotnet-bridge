@@ -134,28 +134,15 @@ Field Reports本体</h2>
 <h2><a class="anchor" id="autotoc_md6"></a>
 NuGetからのインストール</h2>
 <p>本モジュールは，NuGet galleryに登録されています。 利用している開発環境に応じた方法でインストールしてください。</p>
-<div class="fragment"><div class="line">&gt; dotnet add package FieldWorks.FieldReports.Bridge --version 2.0.0</div>
+<div class="fragment"><div class="line">&gt; dotnet add package FieldWorks.FieldReports --version 2.0.0</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
 動作確認</h1>
-<h2><a class="anchor" id="autotoc_md8"></a>
-コマンド連携時</h2>
-<p>本モジュールのソースコードを展開して，以下のコマンドを実行してください。</p>
-<div class="fragment"><div class="line">$ dotnet test</div>
-</div><!-- fragment --><p>reportsコマンドにパスが通っていない場合は，環境変数'REPORTS_PROXY'でコマンドのパスを指定してください （動作環境に応じて，パスは変更してください）。</p>
-<p>LinuxまたはmacOSでの実行例： </p><div class="fragment"><div class="line">$ REPORTS_PROXY=exec:/usr/local/bin/reports dotnet test</div>
-</div><!-- fragment --><p>Windowsでの実行例： </p><div class="fragment"><div class="line">&gt; set REPORTS_PROXY=&quot;C:\Program Files\Field Works\Field Reports 2.0\reports.exe&quot;</div>
-<div class="line">&gt; dotnet test</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
-HTTP連携時</h2>
-<p>Field Reportsをサーバーモードで起動してください。</p>
-<div class="fragment"><div class="line">$ reports server -l4</div>
-</div><!-- fragment --><p>本モジュールのソースコードを展開して，以下のコマンドを実行してください （動作環境に応じて，URLは変更してください）。</p>
-<p>LinuxまたはmacOSでの実行例： </p><div class="fragment"><div class="line">$ REPORTS_PROXY=http://localhost:50080/ dotnet test</div>
-</div><!-- fragment --><p>Windowsでの実行例： </p><div class="fragment"><div class="line">&gt; set REPORTS_PROXY=http://localhost:50080/</div>
-<div class="line">&gt; dotnet test</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
-API使用例</h1>
-<div class="fragment"><div class="line"> {c#}</div>
+<p>動作確認用のコンソールプロジェクトを作成します。</p>
+<div class="fragment"><div class="line">$ dotnet new console -o test</div>
+<div class="line">$ cd test</div>
+<div class="line">$ dotnet add package FieldWorks.FieldReports</div>
+</div><!-- fragment --><p>Program.csを以下のように編集します。</p>
+<div class="fragment"><div class="line"> {c#::Program.cs}</div>
 <div class="line">using FieldWorks.FieldReports;</div>
 <div class="line"> </div>
 <div class="line">var param = new {</div>
@@ -170,9 +157,35 @@ API使用例</h1>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">};</div>
-<div class="line">var reports = Bridge.CreateProxy(&quot;http://localhost:50080/&quot;);</div>
+<div class="line">var reports = Bridge.CreateProxy();</div>
 <div class="line">var pdf = reports.Render(param);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+コマンド連携時</h2>
+<p>以下のコマンドを実行してください。</p>
+<p>LinuxまたはmacOSでの実行例： </p><div class="fragment"><div class="line">$ REPORTS_PROXY=exec:/usr/local/bin/reports dotnet run</div>
+<div class="line">2.0.0b3</div>
+<div class="line">%PDF-1.6</div>
+<div class="line">...</div>
+</div><!-- fragment --><p>Windowsでの実行例： </p><div class="fragment"><div class="line">&gt; set REPORTS_PROXY=&quot;C:\Program Files\Field Works\Field Reports 2.0\reports.exe&quot;</div>
+<div class="line">&gt; dotnet run</div>
+<div class="line">2.0.0b3</div>
+<div class="line">%PDF-1.6</div>
+<div class="line">...</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
+HTTP連携時</h2>
+<p>Field Reportsをサーバーモードで起動してください。</p>
+<div class="fragment"><div class="line">$ reports server -l4</div>
+</div><!-- fragment --><p>以下のコマンドを実行してください（動作環境に応じて，URLは変更してください）。</p>
+<p>LinuxまたはmacOSでの実行例： </p><div class="fragment"><div class="line">$ REPORTS_PROXY=http://localhost:50080/ dotnet run</div>
+<div class="line">2.0.0b3</div>
+<div class="line">%PDF-1.6</div>
+<div class="line">...</div>
+</div><!-- fragment --><p>Windowsでの実行例： </p><div class="fragment"><div class="line">&gt; set REPORTS_PROXY=http://localhost:50080/</div>
+<div class="line">&gt; dotnet run</div>
+<div class="line">2.0.0b3</div>
+<div class="line">%PDF-1.6</div>
+<div class="line">...</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
 著者</h1>
 <ul>
 <li>合同会社フィールドワークス / Field Works, LLC</li>
