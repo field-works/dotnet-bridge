@@ -110,7 +110,7 @@ var pdf = reports.Render(param);
 LinuxまたはmacOSでの実行例：
 ```shell
 $ REPORTS_PROXY=exec:/usr/local/bin/reports dotnet run
-2.0.0rc5
+2.0.0rc6
 %PDF-1.6
 ...
 ```
@@ -119,7 +119,7 @@ Windowsでの実行例：
 ```cmd
 > set REPORTS_PROXY="C:\Program Files\Field Works\Field Reports 2.0\reports.exe"
 > dotnet run
-2.0.0rc5
+2.0.0rc6
 %PDF-1.6
 ...
 ```
@@ -137,7 +137,7 @@ $ reports server -l4
 LinuxまたはmacOSでの実行例：
 ```shell
 $ REPORTS_PROXY=http://localhost:50080/ dotnet run
-2.0.0rc5
+2.0.0rc6
 %PDF-1.6
 ...
 ```
@@ -146,7 +146,7 @@ Windowsでの実行例：
 ```shell
 > set REPORTS_PROXY=http://localhost:50080/
 > dotnet run
-2.0.0rc5
+2.0.0rc6
 %PDF-1.6
 ...
 ```
