@@ -2,13 +2,18 @@ name: doc
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: DenverCoder1/doxygen-github-pages-action@v1.1.0
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen graphviz -y
+      - name: Build documents
+        uses: DenverCoder1/doxygen-github-pages-action@v1.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
