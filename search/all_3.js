@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['iproxy_6',['IProxy',['../interfaceFieldWorks_1_1FieldReports_1_1IProxy.html',1,'FieldWorks::FieldReports']]]
+  ['fieldreports_5',['FieldReports',['../namespaceFieldWorks_1_1FieldReports.html',1,'FieldWorks']]],
+  ['fieldworks_6',['FieldWorks',['../namespaceFieldWorks.html',1,'']]]
 ];
